@@ -1,0 +1,259 @@
+\documentclass[11pt]{article}
+
+%----------Packages----------
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage[mathcal]{eucal}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{verbatim}
+\usepackage{fullpage}
+\usepackage{multicol}
+
+%----------Commands----------
+\clubpenalty=9999
+\widowpenalty=9999
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\O}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\arr}{\longrightarrow}
+
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\bridge}{bridge}
+
+%---------- Proof QED change ----------
+\renewcommand{\qedsymbol}{QED}
+
+%----------Theorems----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\numberwithin{equation}{subsection}
+
+%----------Document----------
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries MATH 20700 Honors Analysis I}\\[6pt]
+    {\Large Midterm Prep Notes}\\[6pt]
+    {\Large\itshape Malhar Manek}
+\end{center}
+
+\bigskip
+
+\section*{Counterexamples}
+\begin{theorem}
+    Infinite union of closed sets that is not closed. Infinite intersection of open sets that is not open. 
+    \begin{proof}
+        $A_n = [0, 1 - 1/n]$, each closed, but $\bigcup_n A_n = [0,1)$ is not closed.
+
+        $A_n = (-1/n, 1/n)$, each open, but $\bigcap_n A_n = \{0\}$ is not open.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    A metric space that is compact when defined with one metric, but not one another metric.
+    \begin{proof}
+        Closed unit ball in infinite dimensions. 
+
+        On the sup norm metric it is not compact.
+
+        On the Euclidean/$\ell_2$ norm metric it is not compact.
+
+        But on the $\sum_{n=1}^\infty \frac{(a_n-b_n)}{2^n}$ metric it is compact.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Examples of sets $X,Y$ such that: Interior of closure of $X$ is not $X$. Closure of interior of $Y$ is not $Y$.
+    \begin{proof}
+        $X=\bbQ$, then $\overline{X}=\bbR$ but $\text{Interior} (\bbR) = \bbR$.
+
+        $Y = \bbQ$, then $\text{Interior}(Y)=\emptyset$ and $\overline{(\text{Interior}(Y))}=\emptyset$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Non-trivial clopen set in a disconnected metric space.
+\begin{proof}
+Let the metric space be $X = [0,1]\cup [2,3] \subset \bbR$. Then we claim that $[0,1]$ is clopen in $X$.
+
+Closed: We want to show that $[2,3]$ is open in $X$. $[0,1] = (1.5,3.5) \cap X$ so it is open in $X$.
+
+Open: $[0,1] = (-0.5, 1.5) \cap X$ so it is open in $X$. 
+\end{proof}
+\end{theorem}
+
+
+\begin{theorem}
+Closed and bounded set in a general metric space $M$ that is not compact.
+\begin{proof}
+Closed unit ball in infinite dimensions equipped with sup norm metric.
+
+Consider the sequence of sequences $(e_n)$ such that the sequence $e_i$ has $1$ in the $i$-th position and 0 everywhere else. Distance between any two sequences is $1$, so there is no Cauchy subsequence hence there is no convergent subsequence.
+
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Cauchy sequence that does not converge in a disconnected metric space.
+\begin{proof}
+    Decimal expansion of $\sqrt2$ in $\bbQ$ i.e. the sequence of rationals $1, 1.4, 1.41, 1.414, 1.4142, 1.41423\dots$
+\end{proof}
+\end{theorem}
+
+
+\begin{theorem}
+Open map that is not continuous.
+\begin{proof}
+\begin{enumerate}
+    \item $f: \bbR_{\text{Euclidean}} \to \bbR_{\text{Discrete}}$ is always an open map because take an open set $U \subset \bbR_{\text{Euclidean}}$, then we claim its image $f(U) \subset \bbR_{\text{Discrete}}$ is open - to check, take ball of $\epsilon = 0.5$ around any point $y\in f(U)$, then the only point in $B_\epsilon(y)$ is $y$ itself, hence $f(U)$ is open.
+
+    \item $f: \bbR \to \{0,1\}$ such that $f(x)=0$ for $x\leq 0$ and $f(x)=1$ for $x>0$. Clearly discontinuous (jump discontinuity) but open sets map to open sets since the image can only ever be $\emptyset, \{0\}, \{1\}$ or $\{0,1\}$ all of which are open in the metric space $\{0,1\}$. 
+
+    \item $f:\bbR_{\text{Euclidean}} \to \bbZ_{\text{Discrete}}$ defined as $f(x) = \lfloor x \rfloor$. 
+
+    \item Harmonic
+    
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Compact to compact but not continuous.    
+\begin{proof}
+    Jump discontinuity $\bbR \to \bbR$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Connected to connected but not continuous.
+    \begin{proof}
+Topologist's sine curve.
+
+$S^1 \to \bbR$ or $S^1 \to [0,2\pi)$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Connected but not path connected.
+\begin{proof}
+Topologist's sine curve. Formally defined as $X \cup Y$ where $X=\{(x,\sin \frac{1}{x})\in \bbR^2: 0<x\leq \frac{1}{\pi}\}$ and $Y=\{(0,y) \in \bbR^2: -1\leq y\leq 1\}$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Complete and bounded but not compact.
+    \begin{proof}
+        (0,1)
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+Continuous bijection that is not a homeomorphism (i.e., whose inverse is not continuous).
+
+\begin{proof}
+$f: [0,2\pi) \to S^1$ defined as $f(x)=(\cos x, \sin x)$ since for the point $(1,0)\in S^1$, the inverse evaluates to $0$ but approaching from below, $f^{-1}(2\pi -\epsilon)$ approaches $2\pi$. 
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+\begin{enumerate}
+    \item  Closed and totally bounded set (not complete) that is not compact.
+    \item Closed and complete set (not totally bounded) that is not compact.
+\end{enumerate}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $[0,1] \cap \bbQ$.
+        \item Closed unit ball in infinite dimensions.
+    \end{enumerate}
+\end{proof}
+\end{theorem}
+
+\bigskip
+
+\section*{Proofs}
+
+\begin{theorem}
+    Cantor set properties: compact, empty interior, nowhere dense, uncountable, totally disconnected.
+\end{theorem}
+
+\begin{theorem}
+    If every closed and bounded subset of a metric space $M$ is compact, then $M$ is complete.
+\end{theorem}
+
+\begin{theorem}
+    If $M$ is connected and $f : M \to N$ is continuous then $f(M)$ is connected. In particular, if $f$ is surjective then $N$ is connected. 
+\end{theorem}
+
+\begin{theorem}
+    If a sequence in $\bbR^n$ converges on one metric then it converges on the other metrics.  
+\end{theorem}
+
+\begin{theorem}
+    Closed and totally bounded and complete implies compact.
+\end{theorem}
+
+\begin{theorem}
+A countable intersection of nested non-empty compact sets is compact and non-empty.
+\end{theorem}
+
+\begin{theorem}
+    Cantor set is compact.
+\end{theorem}
+
+\begin{theorem}
+    Path connected implies connected.
+\end{theorem}
+
+\begin{theorem}
+    Intersection of compact sets is compact.
+    \begin{proof}
+        Let $(K_i)$ be a collection of compact sets. Then, we want to show that $\bigcap_i K_i$ is compact.
+
+        Let $m_1, m_2, \dots$ be a sequence in $\bigcap_i K_i$. Clearly, all the $m_j$'s lie in each of the $K_i$'s (since it is in the intersection), so in particular all the $m_j$'s lie in $K_1$, which is compact, so there is a convergent subsequence $(m_{j_n})$ which converges to $m^* \in K_1$. Let us show that $m^* \in K_q$ for arbitrary $q$.
+
+        Since $(m_{j_n})$ is a subsequence of $(m_j)$ and all the $m_j$'s lie in each of the $K_i$'s, then clearly $(m_{j_n})$ must be in $K_q$. So $(m_{j_n})$ converges to $m^* \in K_q$. 
+
+        Hence $m^*\in \bigcap_i K_i$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Continuous function defined on a compact metric space $M$ is uniformly continuous.
+\end{theorem}
+
+\begin{theorem}
+    Continuous bijection defined on a compact domain is a homeomorphism (i.e., its inverse is automatically continuous).
+\end{theorem}
+
+\begin{theorem}
+Every connected subset of $\bbR$ is path connected. Every connected open subset of $\bbR^n$ is path connected.
+\end{theorem}
+
+\end{document}
