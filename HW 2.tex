@@ -1,0 +1,497 @@
+\documentclass[11pt]{article}
+
+%----------Packages----------
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage[mathcal]{eucal}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{verbatim}
+\usepackage{fullpage}
+\usepackage{multicol}
+
+%----------Commands----------
+\clubpenalty=9999
+\widowpenalty=9999
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\O}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\arr}{\longrightarrow}
+
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\bridge}{bridge}
+
+%---------- Proof QED change ----------
+\renewcommand{\qedsymbol}{QED}
+
+%----------Theorems----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\numberwithin{equation}{subsection}
+
+%----------Document----------
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries MATH 20700 Honors Analysis I}\\[6pt]
+    {\Large Homework 2}\\[6pt]
+    {\Large\itshape Malhar Manek}
+\end{center}
+
+\bigskip
+
+\section*{Problem 5}
+\begin{proof}
+We can represent any point $z \in S^1$ by its angle $\theta_z = \angle(z) \in [0, 2\pi)$. Let $p, q, s$ be points in $S^1$ with corresponding angles $\theta_p, \theta_q, \theta_s$.
+
+The distance is given by $d_a(p,q)=\min \{|\theta_p-\theta_q|, 2\pi - |\theta_p-\theta_q|\}$. Geometrically, this is the length of the shorter arc between $p$ and $q$ on the unit circle.
+
+We check the four properties of a metric.
+
+\begin{enumerate}
+    \item We want to show that $d_a(p,q)\geq 0$. This is obvious since angles are in $[0, 2\pi)$, so $0\leq |\theta_p-\theta_q|< 2\pi$. Both $|\theta_p-\theta_q|$ and $2\pi - |\theta_p-\theta_q|$ are non-negative, so their minimum must be non-negative.
+
+    \item We want to show that $d_a(p,q)=0$ if and only if $p=q$.
+    Suppose $p=q$. Then $\theta_p = \theta_q$, so $|\theta_p-\theta_q|=0$. Thus, $d_a(p,q) = \min\{0, 2\pi\}=0$.
+    Now suppose $d_a(p,q)=0$. This means $\min\{|\theta_p-\theta_q|, 2\pi - |\theta_p-\theta_q|\} = 0$. Since $|\theta_p-\theta_q| < 2\pi$, the term $2\pi - |\theta_p-\theta_q|$ must be positive. Therefore, we must have $|\theta_p-\theta_q|=0$, which implies $\theta_p = \theta_q$, and so $p=q$.
+
+    \item We want to show that $d_a(p,q)=d_a(q,p)$. This is obvious since $|\theta_p-\theta_q|=|\theta_q-\theta_p|$.
+
+    \item We want to show that $d_a(p,q) \leq d_a(p,s)+d_a(s,q)$.
+    The distance $d_a(p,q)$ is the length of the shortest path along the circle's circumference from $p$ to $q$. The sum $d_a(p,s) + d_a(s,q)$ is the length of a particular path from $p$ to $q$: the one which goes from $p$ to $s$ (via the shorter arc) and then from $s$ to $q$ (again via the shorter arc). Since $d_a(p,q)$ is the length of the shortest possible path, it must be less than or equal to the length of this other path that goes via $s$. Thus, the inequality holds.
+
+\end{enumerate}
+Since all four properties hold, $d_a$ is a metric on $S^1$.
+\end{proof}
+
+\bigskip
+
+\section*{Problem 6}
+\begin{proof}
+\begin{enumerate}
+    \item Clearly, $\forall p,q\in [0,\frac{\pi}{2}]$, we have $|p-q| \in [0, \frac{\pi}{2}]$. On this interval, $\sin(x) \ge 0$, so $d_s(p,q) \ge 0$. Equality holds, $d_s(p,q) = \sin|p-q|=0$, if and only if $|p-q|=0$, i.e., $p=q$.
+    
+    \item Clearly, $\forall p,q\in [0,\frac{\pi}{2}]$, the symmetry of the absolute value function gives $d_s(p,q) = \sin|p-q| = \sin|q-p| = d_s(q,p)$.
+    
+    \item We claim that $\forall p,q,r\in [0,\frac{\pi}{2}]$, $d_s(p,q) \leq d_s(p,r)+d_s(r,q)$. This is equivalent to showing $\sin|p-q| \leq \sin|p-r| + \sin|r-q|$.
+    
+    By the triangle inequality for real numbers, we know $|p-q| \le |p-r| + |r-q|$. Since $\sin x$ is an increasing function on $[0, \frac{\pi}{2}]$, this implies:
+    $$ \sin|p-q| \le \sin(|p-r| + |r-q|) $$
+    Our task reduces to proving that $\sin(x+y) \le \sin x + \sin y$ for any $x, y \ge 0$ such that $x+y \in [0, \frac{\pi}{2}]$.
+    
+    Invoking calculus, let's fix $y \ge 0$ and define a function $f(t) = (\sin t + \sin y) - \sin(t+y)$ for $t \ge 0$. We note that the derivative of $\sin$ is $\cos$. The derivative of our function is:
+    $$ f'(t) = \cos t - \cos(t+y) $$
+    As $\cos$ is strictly decreasing on the interval $[0,\frac{\pi}{2}]$, and $t < t+y$, it follows that $\cos t > \cos(t+y)$, which means $f'(t) > 0$.
+    
+    Since its derivative is positive, $f(t)$ is an increasing function. Therefore, for any $x \ge 0$, we must have $f(x) \ge f(0)$. We calculate $f(0) = \sin 0 + \sin y - \sin y = 0$.
+    
+    Thus, $f(x) \ge 0$, which implies $\sin x + \sin y - \sin(x+y) \ge 0$, or $\sin(x+y) \le \sin x + \sin y$.
+    
+    Combining our results, we have:
+    $$ d_s(p,q) = \sin|p-q| \le \sin(|p-r| + |r-q|) \le \sin|p-r| + \sin|r-q| = d_s(p,r)+d_s(r,q) $$
+    The triangle inequality holds.
+\end{enumerate}
+Thus, $d_s$ is a metric.
+\end{proof}
+
+\bigskip
+
+\section*{Problem 7}
+\begin{proof}
+Let $(p_n)$ be a convergent sequence in the metric space $M$. Then choosing $\epsilon =1$, we know that $\exists N \in \mathbb{N}$ such that $\forall n \geq N, |p_n-q|<1$. There are finitely many $ n\in \mathbb{N}$ such that $n<N$, so let $s=\max\{|p_n-q| : n<N\}$. Then, taking $r=\max\{s,1\}$ completes the proof.
+
+\end{proof}
+
+\section*{Problem 9}
+\begin{proof}
+Let us call the property that every bounded monotone sequence converges the ``monotone bounded sequence property”.
+
+Since we know that $\bbR$ has the least upper bound property, it suffices to show that for a general metric space $M$, the least upper bound property implies monotone bounded sequence property.
+
+Suppose every non-empty subset of the metric space $M$ that is bounded above has a supremum in $M$ (i.e., $M$ has the least upper bound property). Let $(x_n)$ be a monotone bounded sequence of points of $M$ and without loss of generality suppose $(x_n)$ is increasing (if it is decreasing then the proof is analogous with greatest lower bound property instead of least upper bound property). 
+
+The set of points of this sequence $\{x_n\}$ is bounded and non-empty, hence it has a supremum $y\in M$. We want to show that ${x_n} \displaystyle \rightarrow y$. 
+
+Let $\epsilon>0$ be arbitrary, then we want to show that $\exists N_\epsilon \in \bbN$ such that $\forall n \geq N_\epsilon, |x_n-y|<\epsilon$. 
+
+Since the sequence is increasing, we know that if $n>m$ then $y\geq x_n\geq x_m$. Hence, it suffices to show that $\exists n_\epsilon$ such that $|x_{n_\epsilon}-y|<\epsilon$. Suppose for sake of contradiction that there does not exist such $n_\epsilon$. Then, $\forall n\in \bbN, |x_n-y|\geq \epsilon$, i.e., $x_n \leq y-\epsilon$ or $x_n\geq y+\epsilon$. Since $y$ is the supremum, the latter is ruled out, and we have that $\forall n\in \bbN, x_n\leq y-\epsilon\leq y$ giving a smaller upper bound and contradicting the assumption that $y$ is the supremum.
+
+This proves that every monotone bounded sequence of points in $\bbR$ converges in $\bbR$. 
+
+\end{proof}
+
+\section*{Problem 11}
+\begin{proof}
+% Your proof here
+\begin{enumerate}
+    \item[a)] Let $(a_n)$ be a sequence of real numbers. We want to show that there exists either an increasing subsequence or a decreasing subsequence or both.
+
+Case 1: An infinite decreasing subsequence exists.  Then we are done.
+
+Case 2: No infinite decreasing subsequence exists.  
+Then every decreasing subsequence is finite.  
+In this case, we claim that there exists an increasing subsequence. 
+
+For each index $i \in \mathbb{N}$ of the original sequence, define
+\[
+  d(i)
+  =
+  \max\bigl\{\,\ell\in\mathbb{N} \mid
+    \exists\,i=n_1<n_2<\cdots<n_\ell\text{ with }a_{n_1}\ge a_{n_2}\ge\cdots\ge a_{n_\ell}
+  \bigr\}.
+\]
+In words, $d(i)$ is the length of the longest finite decreasing subsequence that starts with the element at index $i$.
+(The maximum exists because by hypothesis every decreasing subsequence is finite.)
+
+Since each $d(i)$ is finite, for each $i$ we can choose a particular sequence of indices
+\[
+  s_{i,1},\;s_{i,2},\;\dots,\;s_{i,d(i)},\qquad
+  s_{i,1}=i,\;\;s_{i,1}<s_{i,2}<\dots<s_{i,d(i)},
+\]
+with 
+\(
+  a_{s_{i,j}}\ge a_{s_{i,k}}\text{ whenever }j<k,
+\)
+and set  $L(i)=s_{i,d(i)}$
+as the last index of this chosen subsequence.
+
+Now define inductively
+\[
+  n_1 = L(1),
+  \qquad
+  n_{t+1} = L\bigl(n_t + 1\bigr)
+  \quad (t\ge 1).
+\]
+
+We claim that the subsequence $\bigl(a_{n_t}\bigr)_{t\ge1}$ is strictly increasing.
+
+Since $L(i)$ is the last term of a maximal decreasing subsequence that starts at $i$, we cannot extend that subsequence any further.
+Hence  
+\[
+  j > L(i)
+  \;\;\Longrightarrow\;\;
+  a_{L(i)} < a_j.
+\]
+
+By construction, $n_{t+1}=L(n_t+1)\ge n_t+1>n_t$, so $n_1<n_2<\dots$.
+
+Take $i = n_t+1$ and set $j=n_{t+1}$, then
+\[
+  a_{n_t} = a_{L(n_t+1)} < a_{n_{t+1}}\text{ for every }t.
+\]
+Thus $a_{n_t}<a_{n_{t+1}}$, proving the claim.
+
+\medskip
+\noindent
+Consequently, in Case~2 we get an infinite increasing subsequence, while in Case~1 an infinite decreasing subsequence already exists.  
+Therefore every sequence of real numbers has an increasing subsequence or a decreasing subsequence (or both).
+
+This completes the proof.
+
+\item[b)] Part a) tells us that every sequence in $\bbR$ has a monotone subsequence. In particular, every bounded sequence in $\bbR$ has a bounded monotone subsequence, which, by Problem 9, is a convergent subsequence.
+
+\item[c)] Bolzano-Weierstrass theorem says that every bounded sequence has a convergent subsequence. By part b), we have an alternative proof of this.
+
+\item[d)] Heine-Borel theorem says that every closed and bounded subset of $\bbR^n$ is compact (though in this case we are concerned only with closed and bounded subsets of $\bbR$). 
+
+By the above, we know that every bounded sequence has a convergent subsequence. Hence, every sequence in a closed and bounded set has a subsequence that converges to a point in the set, and this is exactly the definition of compactness.
+
+Hence, Heine-Borel theorem generalises the Bolzano-Weierstrass theorem. 
+    
+\end{enumerate}
+\end{proof}
+
+\section*{Problem 12}
+\begin{proof}
+\begin{enumerate}
+    \item[a)] Yes, limits are indeed unaffected by rearrangement under a bijective function. Suppose the sequence $(p_n)$ converges to $x$ and fix some arbitrary $\epsilon>0$.
+
+    By definition of convergence, $\exists N^* \in \bbN$ such that for all $n\geq N^*, |p_n-x|<\epsilon$. Since there are finitely many indices $i<N^*$, write them as $A =\{i \mid i <N^*, 1\leq i\leq j\}$, then compute the set \[
+    B = \{f^{-1}(i) \mid i \in A\}.
+    \]
+
+Clearly, $B$ is finite (since $A$ is finite and the function $f$ is bijective) so take $b^*=\max(B)$. Remember that by construction, $\forall b\in B, |p_{f(b)}-x|\geq \epsilon$. Then, since $b^*$ is the maximum, we clearly have $\forall n\geq b^*, |q_n-x|<\epsilon$. This proves that $(q_n)$ converges to $x$. 
+
+\item[b)] If the limit of $p_n$ exists and $f$ is injective, we repeat the exact same argument as in part a). Again, the construction is well-defined because $f^{-1}$ is well-defined when $f$ is injective.
+
+However, if the limit of $p_n$ does not exist, then it may be possible that the rearrangement under an injective function does have a limit.
+
+Consider the sequence $p_n=-1,1,-1,1,-1,1,\dots$ which clearly diverges. The injective map defined by $\forall i, f(i)=2i$ produces the sequence $q_n =1,1,1,1,\dots$ which clearly converges to $1$.
+
+\item [c)] Suppose $f$ is surjective but not injective. We claim that limits may not be preserved under rearrangement in this case. 
+
+Consider the following counterexample. Define the sequence $(p_n)$ as $p_1=-1$ and $\forall i\geq 2, p_i=1$. Clearly, this sequence converges to $1$. 
+
+Now consider the surjective function $f$ defined as $f(n)=1$ if $n$ is odd and $f(n) = \frac{n}{2}+1$ if $n$ is even. 
+
+Under the rearrangement defined by this function, we have $q_n=-1,1,-1,1,-1,1,\dots$ and it is easy to see that $q_n$ is not Cauchy (because $\forall j\geq 2, |q_j-q_{j-1}|=2$), hence it is not convergent.
+
+\end{enumerate}
+
+\end{proof}
+
+\section*{Problem 13}
+\begin{proof}
+We construct the sequence $m_n$ such that $\forall n, m_{2n}=p_n, m_{2n-1}=p$. Clearly, $m_n$ converges to $p$.
+
+By the assumption, the sequence $f(m_n)$ converges. Moreover, the subsequence $f(m_{2n-1})=f(p)$ is a constant and converges to $f(p)$. 
+
+Thus, we have a convergent sequence $f(m_n)$ which has a subsequence $f(m_{2n-1})$ which converges to $f(p)$, hence we know that the sequence itself, and any other subsequences, must all converge to the same point $f(p)$.
+
+Hence, we conclude that the sequence $f(m_{2n})=f(p_n)$ converges to $f(p)$. We have hereby proved that $f$ maps the convergent sequence $p_n \to p$ to the convergent sequence $f(p_n) \to f(p)$. This is exactly the definition of a continuous function.
+
+\end{proof}
+
+\section*{Problem 17}
+\begin{proof}
+The letters C, G, I, J, L, M, N, O, S, U, V, W, Z are homeomorphic to each other, because each of them can be unbent into a single straight line.
+
+D, P and O are homeomorphic to each other because they can each be unbent into a circle.
+
+E, F, T and Y are homeomorphic to each other because in a sense each of them have one `junction'.
+
+K and X are homeomorphic to each other because in a sense each of them has two `junctions'.
+
+A, Q, R, H and B are not homeomorphic to any letter.
+
+None of them are isometric to any other, because the purpose of the alphabet is to make letters distinctly recognisable, ensuring that no two letters are isometric.
+
+\end{proof}
+
+\section*{Problem 22}
+\begin{proof}
+Yes. To prove this, consider a Cauchy sequence $(x_n)$ in $M$ and let $X=\{x_n \mid n\in \bbN\} \subset M$. We claim that is $X$ is bounded (Claim 1). 
+
+Consider the closure of $X$, denoted $\overline{X}$, which is clearly closed. We claim that the boundedness of $X$ implies that $\overline{X}$ is bounded (Claim 2).
+
+Thus, $\overline{X}$ is closed and bounded, hence by assumption, it is compact. Hence, every sequence of points in $X$ has a convergent subsequence. In particular, the original Cauchy sequence $(x_n)$ has a convergent subsequence. 
+
+We claim that if a Cauchy sequence has a subsequence that converges to $y$, then the original Cauchy sequence itself also converges to $y$ (Claim 3). Then, we see that every Cauchy sequence in $M$ converges, showing that $M$ is complete.
+
+Let us now prove our claims.
+
+\textbf{Claim 1}:  Let $(x_n)$ be a Cauchy sequence in a metric space $M$. By definition, for $\epsilon = 1$, there exists an integer $N$ such that for all $m, n \geq N$, $d(x_m, x_n) < 1$.
+In particular, for all $n \geq N$, we have $d(x_n, x_N) < 1$. This means all terms from $x_N$ onwards are contained in the ball $B_1(x_N)$.
+
+Now consider the finite set of the first $N-1$ terms: $\{x_1, x_2, \ldots, x_{N-1}\}$. Let $R$ be the maximum distance from these points to $x_N$, plus the radius $1$ we are already considering:
+$$ R = \max\{d(x_1, x_N), d(x_2, x_N), \ldots, d(x_{N-1}, x_N), 1\} $$
+For any term $x_k$ in the sequence, we see that if $k < N$, then $d(x_k, x_N) \leq R$ by definition of $R$. And if $k \geq N$, then $d(x_k, x_N) < 1 \leq R$.
+
+Therefore, for all $k \in \mathbb{N}$, $d(x_k, x_N) \leq R$. This shows that the entire set of points $X = \{x_n \mid n \in \mathbb{N}\}$ is contained within the closed ball $\overline{B}_R(x_N)$, and is therefore bounded. 
+
+\textbf{Claim 2}: Let $X$ be a bounded set. By definition, there exists a point $p \in M$ and a radius $R > 0$ such that for all $x \in X$, $d(p, x) < R$. This means $X \subseteq B_R(p)$.
+
+We want to show that $\overline{X}$ is also bounded. Let $y$ be an arbitrary point in $\overline{X}$. By the definition of the closure, any open ball centered at $y$ must contain a point from $X$. Let's consider the ball $B_1(y)$. There must exist a point $x_0 \in X$ such that $x_0 \in B_1(y)$, which implies $d(y, x_0) < 1$.
+
+Since $x_0 \in X$, we know that $d(p, x_0) < R$.
+By the triangle inequality, we can bound the distance $d(p, y)$:
+$$ d(p, y) \leq d(p, x_0) + d(x_0, y) < R + 1 $$
+Since $y$ was an arbitrary point in $\overline{X}$, this inequality holds for all points in $\overline{X}$. Thus, $\overline{X}$ is contained within the ball $B_{R+1}(p)$, which proves that $\overline{X}$ is bounded.
+
+\textbf{Claim 3}:  Let $(x_n)$ be a Cauchy sequence and let $(x_{n_k})$ be a subsequence that converges to $y$, i.e., $\lim_{k \to \infty} x_{n_k} = y$. We want to show that $\lim_{n \to \infty} x_n = y$.
+
+Let $\epsilon > 0$ be arbitrary. 
+
+Since $(x_n)$ is a Cauchy sequence, there exists an integer $N_1$ such that for all $m, n > N_1$, we have $d(x_m, x_n) < \frac{\epsilon}{2}$.
+
+Since $x_{n_k} \to y$, there exists an integer $K$ such that for all $k > K$, we have $d(x_{n_k}, y) < \frac{\epsilon}{2}$.
+
+We need to find an $N$ such that for all $n > N$, $d(x_n, y) < \epsilon$. Choose an index $k'$ from the subsequence large enough so that both $k' > K$ and the corresponding term index $n_{k'} > N_1$. We can always do this because $n_k \to \infty$ as $k \to \infty$.
+
+Let $N = n_{k'}$. Now consider any $n > N$.
+Since $n > N = n_{k'}$ and $n_{k'} > N_1$, both $n$ and $n_{k'}$ are greater than $N_1$. Therefore,
+$$ d(x_n, x_{n_{k'}}) < \frac{\epsilon}{2} $$
+Also, since $k' > K$,
+$$ d(x_{n_{k'}}, y) < \frac{\epsilon}{2}  $$
+Using the triangle inequality:
+$$ d(x_n, y) \leq d(x_n, x_{n_{k'}}) + d(x_{n_{k'}}, y) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon $$
+This holds for all $n > N$, so by definition, the sequence $(x_n)$ converges to $y$.
+
+*** 
+
+Unrelated side remarks: The infinite dimensional unit sphere (as seen in lecture) is closed and bounded but not compact. However, it is complete because there are no Cauchy sequences!
+
+
+
+
+\end{proof}
+
+\section*{Problem 28}
+\begin{proof}
+\begin{enumerate}
+    \item[a)] Not necessarily. For a counterexample, consider $M= \bbR$ with the Euclidean metric and $N= \bbR$ with the discrete metric.
+
+    In this case, for \textbf{any} function $f: M \to N$, if $U\subseteq M$ is open then $f(U) \subseteq N$ is open. To see that $f(U)$ is indeed open, pick any arbitrary point $x\in f(U)$ and we want to show that $\exists \epsilon>0$ such that $B_\epsilon(x) \subset U$. In particular, $\epsilon = 0.21$ works for any such $x$, because by the definition of the discrete metric, the only point in $B_{0.21}(x)$ is $x$ itself! Any other point is a distance 1 away from $x$. Then clearly $\forall x\in f(U), B_{0.21}(x) \subset f(U)$. 
+
+    In this argument, we never assumed anything about the function $f$ itself, so it could be either continuous or discontinuous and the argument would remain the same. 
+    
+
+    \item[b)] Yes. We know that continuous functions satisfy the property that the preimage of an open set is open. 
+
+    Since $f$ is a homeomorphism, we know that $f^{-1}: N \to M$ is continuous, hence given an open set $U \subseteq M$ the preimage under $f^{-1}$ is open, hence $(f^{-1})^{-1}(U)=f(U)$ is open.
+
+    \item[c)] Yes. Because $f$ is a bijection, we know that $f^{-1}:N \to M$ is a bijection, hence it suffices to show that $f^{-1}$ is continuous. Let $U \subseteq M$ be open, then its preimage under the inverse is $(f^{-1})^{-1}(U)=f(U)$ which is open since $f$ is an open map.
+
+    \item[d)] No. Consider the function $f: \bbR \to \bbR $ defined as $\forall x<0, f(x)=x$, $\forall 0\leq x\leq 1, f(x)=0, \forall x>1, f(x)=x-1$. 
+
+    Then take the open interval $U=(0.21, 0.73) \subset \bbR$, then its image is $f(U)=\{0\}$ which is not open.  
+
+    \item[e)] Yes. We know $f$ and $f^{-1}$ are continuous and $f$ is surjective, hence it suffices to show that $f$ must be injective. In particular, it suffices to show that $f$ must be monotone.
+
+    Suppose for sake of contradiction that $f: \bbR \to \bbR$ is not monotone, then it must have a local maximum or a local minimum (or both). 
+
+    Without loss of generality, assume that $f$ has a local maximum at $x \in \bbR$, i.e., $\exists \epsilon>0$ such that $\forall y \in (x-\epsilon, x+\epsilon), f(y)<f(x)$. Write $X=(x-\epsilon, x+\epsilon)$, then it is easy to see that $X$ is open, and we claim that its image $f(X)$ is not open, contradicting the assumption that $f$ is an open map.
+
+    To prove the claim, consider $f(x) \in f(X)$, then clearly $\not \exists \delta>0$ such that $(f(x)-\delta, f(x)+\delta) \subset f(X)$, because $f(x)$ is the maximum point of $f(X)$ so any $f(x)+\delta$ is no longer in $f(X)$ for $\delta>0$. 
+    
+
+    \item[f)] No. We claim for a counterexample that there exists a continuous open surjection $f: S^1 \to S^1$ that is not a homeomorphism.
+
+    For any point on the unit circle $S^1$, the point can be fully characterised by its angle $\theta$ with respect to the positive $x$-axis. Then, we define $\forall \theta \in [0,2\pi), f(\theta)=2\theta \mod 2\pi$. 
+
+    Clearly $f$ is continuous. The inverse is also simply $f^{-1}(\theta)=\frac{\theta}{2}$ hence it is continuous, and $f$ is open. It is also clearly surjective since $\forall \theta \in [0,2\pi)$, we have $f(\frac{\theta}{2})=\theta$.
+
+    But this is not a bijection, since $f(0)=f(\pi)=0$, hence it is not injective.
+    
+
+    
+    
+\end{enumerate}
+
+\end{proof}
+
+\section*{Problem 101}
+\begin{proof}
+We know that $\displaystyle \sum_{i=1}^\infty \frac{1}{2^i} = 1$, hence $\forall a,b \in \sum, 0\leq d(a,b) \leq 1$. 
+
+
+\begin{enumerate}
+    \item[a)] We want to show that for any sequence $(x_1,x_2,\dots)$ with $x_1, x_2, \dots \in \sum$, we can find a convergent subsequence.
+
+Since this is a sequence of sequences, let us use the notation $x_{ij}$ such that $x_{12}$, for example, is the 2nd element of $x_1$.
+
+Let us construct the convergent subsequence inductively.
+
+For $j=1$, there must be infinitely many sequences in our original sequence such that their first component $x_{i1}$ is the same (either 1 or 0).
+
+Then, we can repeat this process. From the infinite subsequence we just found, we can find an infinite sub-subsequence where the second component $x_{i2}$ is the same.
+
+Continuing this process, we construct a subsequence and a limit point. Let the original sequence be $S_0 = (x_1, x_2, x_3, \dots)$.
+
+First, we construct the limit point, which we will call $y = (y_1, y_2, \dots)$.
+\begin{enumerate}
+    \item Consider the sequence of first components $(x_{11}, x_{21}, x_{31}, \dots)$. As this is a sequence of 0s and 1s, one value must appear infinitely often. Let this value be $y_1$. Let $S_1$ be the subsequence of $S_0$ consisting of all sequences whose first component is $y_1$.
+    \item Now consider the second components of the sequences in the infinite subsequence $S_1$. Again, one value must appear infinitely often. Let this be $y_2$. Let $S_2$ be the subsequence of $S_1$ whose sequences all have $y_2$ as their second component.
+    \item We continue this process inductively. Having constructed the infinite subsequence $S_{k-1}$, we define $y_k$ to be the value that appears infinitely often in the $k$-th position of sequences in $S_{k-1}$, and we define $S_k$ as the subsequence of $S_{k-1}$ where all sequences share $y_k$ as their $k$-th component.
+\end{enumerate}
+This procedure gives us a candidate for the limit, the sequence $y = (y_1, y_2, y_3, \dots) \in \sum$.
+
+Next, we construct the convergent subsequence, let's call it $(z_k)_{k \ge 1}$, by taking the ``diagonal" of our subsequences. Let $z_1$ be the first sequence in $S_1$. Let $z_2$ be the second sequence in $S_2$. In general, let $z_k$ be the $k$-th sequence in $S_k$.
+
+By this construction, the sequence $z_k$ is an element of $S_j$ for all $j \le k$. This means the first $k$ components of $z_k$ are precisely $(y_1, y_2, \dots, y_k)$.
+
+To see that $(z_k)$ converges to $y$, fix any arbitrary $\epsilon>0$. Choose any $m\in \mathbb{N}$ such that $\frac{1}{2^{m-1}}<\epsilon$. For any index $k \ge m$ in our subsequence, we see that the distance between $z_k$ and $y$ is:
+$$d(z_k, y) = \sum_{n=1}^\infty \frac{|z_{kn} - y_n|}{2^n}$$
+where $z_{kn}$ is the $n$-th component of the sequence $z_k$. By our construction, the first $k$ components of $z_k$ match the first $k$ components of $y$. Therefore, $z_{kn} = y_n$ for all $1 \le n \le k$. This means the first $k$ terms in the sum for the distance are zero.
+$$d(z_k, y) = \sum_{n=k+1}^\infty \frac{|z_{kn} - y_n|}{2^n}$$
+Since the components are either 0 or 1, the numerator $|z_{kn} - y_n|$ is at most 1. We can therefore bound the sum:
+$$d(z_k, y) \le \sum_{n=k+1}^\infty \frac{1}{2^n}$$
+This is a geometric series which sums to $\frac{1}{2^k}$. Since we are considering $k \ge m$, we have:
+$$d(z_k, y) \le \frac{1}{2^k} \le \frac{1}{2^m} < \frac{1}{2^{m-1}} < \epsilon$$
+Thus, for any $\epsilon > 0$, we have found an $m$ such that for all $k \ge m$, $d(z_k, y) < \epsilon$. This proves that the subsequence $(z_k)$ converges to $y$.
+
+Thus, every sequence has a convergent subsequence, hence $\sum$ is compact.
+    
+    
+    \item[b)] As we saw in lecture, every element of the Cantor set can be written as a decimal expansion with infinite string/sequence of 0's and 2's. (In the $n$-th iteration of the middle-thirds construction of the Cantor set, if the point lies right of the middle then set the $n$-th term of the sequence as $2$, and if the point lies left of the middle then set the $n$-th term of the sequence as $0$). 
+
+    Then there is a natural bijection to construct from $\sum$ to the Cantor set: take any element (string of 0's and 1's) in $\sum$, then map it to the same element in the Cantor set, with 0 corresponding to 0 and 1 corresponding to 2. 
+
+
+    Formally, let the Cantor set $C$ be the set of all real numbers in $[0, 1]$ that admit a ternary expansion using only the digits 0 and 2. That is,
+$$C = \left\{ x \in [0, 1] \;\middle|\; x = \sum_{n=1}^{\infty} \frac{c_n}{3^n} \text{ where } c_n \in \{0, 2\} \text{ for all } n \ge 1 \right\}.$$
+Let $\sum$ be the set of all infinite sequences of zeroes and ones.
+
+We define the function $f: \sum \to C$ as follows. For any sequence $a = (a_n)_{n=1}^{\infty} = (a_1, a_2, a_3, \dots) \in \sum$, we map it to the point $f(a) \in C$ given by
+$$f(a) = \sum_{n=1}^{\infty} \frac{2a_n}{3^n}.$$
+
+Now we want to check that $f$ is bijective, continuous and its inverse is also continuous. We know that $\sum$ is compact, hence it suffices to check that $f$ is bijective and continuous. (There is a theorem which says that a continuous bijection defined on a compact domain is a homeomorphism).
+
+\textbf{Injectivity:}
+Let $a = (a_n)$ and $b = (b_n)$ be two distinct sequences in $\sum$. Since $a \neq b$, there must be a first index $k \ge 1$ at which they differ. Let's assume without loss of generality that $a_k = 1$ and $b_k = 0$, while $a_n = b_n$ for all $n < k$. We want to show that $f(a) \neq f(b)$.
+
+Consider the difference $f(a) - f(b)$:
+$$ f(a) - f(b) = \sum_{n=1}^{\infty} \frac{2(a_n - b_n)}{3^n} = \frac{2(a_k - b_k)}{3^k} + \sum_{n=k+1}^{\infty} \frac{2(a_n - b_n)}{3^n} $$
+Since $a_n = b_n$ for $n < k$, those terms are zero. As $a_k=1$ and $b_k=0$:
+$$ f(a) - f(b) = \frac{2}{3^k} + \sum_{n=k+1}^{\infty} \frac{2(a_n - b_n)}{3^n} $$
+The terms in the remaining sum are bounded, since $a_n, b_n \in \{0, 1\}$, which means $a_n - b_n \in \{-1, 0, 1\}$. The sum is bounded below by the case where $a_n=0$ and $b_n=1$ for all $n > k$:
+$$ \sum_{n=k+1}^{\infty} \frac{2(a_n - b_n)}{3^n} \ge \sum_{n=k+1}^{\infty} \frac{-2}{3^n} = -2 \sum_{n=k+1}^{\infty} \left(\frac{1}{3}\right)^n $$
+This is a geometric series with sum $-2 \left( \frac{1/3^{k+1}}{1 - 1/3} \right) = -2 \left( \frac{1/3^{k+1}}{2/3} \right) = -\frac{1}{3^k}$.
+Therefore,
+$$ f(a) - f(b) \ge \frac{2}{3^k} - \frac{1}{3^k} = \frac{1}{3^k} > 0 $$
+This implies $f(a) > f(b)$, so $f(a) \neq f(b)$. Thus, $f$ is injective.
+
+\textbf{Surjectivity:}
+Let $x$ be an arbitrary element of the Cantor set $C$. By the definition of $C$, $x$ has a ternary expansion consisting only of the digits 0 and 2:
+$$ x = \sum_{n=1}^{\infty} \frac{c_n}{3^n} \quad \text{where } c_n \in \{0, 2\} \text{ for all } n \ge 1 $$
+We need to find a sequence $a = (a_n) \in \sum$ such that $f(a) = x$.
+Let's construct the sequence $a$ by defining its terms as $a_n = c_n / 2$.
+Since $c_n$ is either 0 or 2, $a_n$ is either $0/2=0$ or $2/2=1$. Therefore, $a = (a_n)$ is an infinite sequence of zeroes and ones, so $a \in \sum$.
+
+Now we apply the function $f$ to this sequence $a$:
+$$ f(a) = \sum_{n=1}^{\infty} \frac{2a_n}{3^n} = \sum_{n=1}^{\infty} \frac{2(c_n/2)}{3^n} = \sum_{n=1}^{\infty} \frac{c_n}{3^n} = x $$
+Since for any $x \in C$ we have constructed a preimage $a \in \sum$, the function $f$ is surjective.
+
+Since $f$ is both injective and surjective, it is bijective.
+
+Now let us check that $f$ is continuous. Let $a,b\in \sum$. 
+
+We begin by considering the distance between their images in the Cantor set $C$, which is the standard absolute value distance in $\mathbb{R}$:
+$$|f(a) - f(b)| = \left| \sum_{n=1}^{\infty} \frac{2a_n}{3^n} - \sum_{n=1}^{\infty} \frac{2b_n}{3^n} \right| = \left| \sum_{n=1}^{\infty} \frac{2(a_n - b_n)}{3^n} \right|$$
+By the triangle inequality for infinite series ($|\sum x_n| \le \sum |x_n|$), we can bound this expression:
+$$|f(a) - f(b)| \le \sum_{n=1}^{\infty} \left| \frac{2(a_n - b_n)}{3^n} \right| = \sum_{n=1}^{\infty} \frac{2|a_n - b_n|}{3^n}$$
+Now, we relate this expression to the metric $d(a,b) = \sum_{n=1}^\infty \frac{|a_n - b_n|}{2^n}$. For any integer $n \ge 1$, we know that $2^n < 3^n$, which implies $\frac{1}{3^n} < \frac{1}{2^n}$. Since $|a_n - b_n|$ is non-negative, we can write:
+$$\frac{|a_n - b_n|}{3^n} \le \frac{|a_n - b_n|}{2^n}$$
+Substituting this inequality back into our sum, we get:
+$$\sum_{n=1}^{\infty} \frac{2|a_n - b_n|}{3^n} \le \sum_{n=1}^{\infty} \frac{2|a_n - b_n|}{2^n} = 2 \left( \sum_{n=1}^{\infty} \frac{|a_n - b_n|}{2^n} \right)$$
+The expression in the parenthesis is precisely the definition of the metric $d(a,b)$. Therefore, we have established the relationship:
+$$|f(a) - f(b)| \le 2 \, d(a,b)$$
+Now we can show continuity using the standard $\epsilon$-$\delta$ definition. Let $\epsilon > 0$ be given. We must find a $\delta > 0$ such that if $d(a,b) < \delta$, then $|f(a) - f(b)| < \epsilon$.
+
+Choose $\delta = \frac{\epsilon}{2}$.
+If $d(a,b) < \delta$, then from our derived inequality:
+$$|f(a) - f(b)| \le 2 \, d(a,b) < 2\delta = 2\left(\frac{\epsilon}{2}\right) = \epsilon$$
+Thus, for any $\epsilon > 0$, we have found a $\delta > 0$ that satisfies the condition for continuity. This completes the proof.
+
+
+    
+\end{enumerate}
+
+\end{proof}
+
+\end{document}
