@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+
+%----------Packages----------
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage[mathcal]{eucal}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{verbatim}
+\usepackage{fullpage}
+\usepackage{multicol}
+
+%----------Commands----------
+\clubpenalty=9999
+\widowpenalty=9999
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\O}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\arr}{\longrightarrow}
+
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\bridge}{bridge}
+
+%---------- Proof QED change ----------
+\renewcommand{\qedsymbol}{QED}
+
+%----------Theorems----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\numberwithin{equation}{subsection}
+
+%----------Document----------
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries MATH 20700 Honors Analysis I}\\[6pt]
+    {\Large Homework 3}\\[6pt]
+    {\Large\itshape Malhar Manek}
+\end{center}
+
+\bigskip
+
+\section*{Problem 2}
+\begin{proof}
+\begin{enumerate}
+    \item[a)] For uniform continuity, we want a single delta (dependent on epsilon) that works for all points $u,x \in (a,b)$.
+
+    We want $H|u-x|^\alpha <\epsilon$ where $|u-x|\leq \delta$, so it is clear that picking $\delta \leq \sqrt[\alpha]{\frac{\epsilon}{H}}$ proves uniform continuity.
+
+    Clearly, we can infer that the $\alpha$-Hölder function $f: (a,b) \to \bbR$ extends uniquely to a continuous function $g:[a,b] \to \bbR$, namely such that $$
+g(y) =
+\begin{cases}
+  \displaystyle \lim_{x\to a} f(x) & \text{if } y = a \\
+  f(y) & \text{if } a < y < b \\
+  \displaystyle \lim_{x\to b} f(x) & \text{if } y = b.
+\end{cases}
+$$
+
+We claim that the extended function is indeed $\alpha$-Hölder. If $u,x \in (a,b)$ then we are done. 
+
+Case 1: $u\in \{a,b\}$ and $x\in (a,b)$, i.e., one of the points is an end point. Without loss of generality suppose $u=a$ and $x\in (a,b)$. 
+
+Consider a sequence of points $(u_n)$ in the interval $(a,b)$ such that $u_n \to a$, i.e., $\displaystyle \lim_{n\to \infty} u_n =a$. Then, $|f(a)-f(x)|=\displaystyle \lim_{n\to \infty} |f(u_n)-f(x)|\leq \displaystyle \lim_{n\to \infty} H|u_n-x|^\alpha = H|a-x|^\alpha$. The case $u=b$ is analogous.
+
+Case 2: if $u,x\in \{a,b\}$, i.e., both of the points are end points. We do the same as above, except we now take two sequences $(p_n),(q_n)$ of points in $(a,b)$ such that $p_n\to a$ and $q_n \to b$. 
+
+Then, $|f(a)-f(b)|=\displaystyle \lim_{n\to \infty} |f(p_n)-f(q_n)|\leq \displaystyle \lim_{n\to \infty} H|p_n-q_n|^\alpha = H|a-b|^\alpha$. Hence, the extended function is $\alpha$-Hölder.
+
+\item [b)] It means the function is Lipschitz continuous.
+
+\item [c)] Since $|f(x)-f(u)|\leq H|x-u|^\alpha$, we see that $\frac{|f(x)-f(u)|}{|x-u|} \leq H |x-u|^{\alpha-1}$ and $\alpha-1>0$. Taking the limit $u
+\to x$, we see that $\displaystyle \lim_{x\to u} \frac{|f(x)-f(u)|}{|x-u|} \leq \displaystyle \lim_{x\to u} H |x-u|^{\alpha-1}=0$. Hence $f'(x)=0$ for all $x$ (since $x$ was arbitrary).
+    
+\end{enumerate}
+\end{proof}
+
+\bigskip
+
+\section*{Problem 5}
+\begin{proof}
+Yes, it follows that $f'(0)$ exists.
+
+To prove this, we must show that the limit defining the derivative at 0 exists and equals $L$. By definition, we need to show
+$$f'(0) = \lim_{h \to 0} \frac{f(h) - f(0)}{h} = L.$$
+
+Consider the interval $[0, h]$ (if $h > 0$) or $[h, 0]$ (if $h < 0$). By the Mean Value Theorem, there exists a number $c_h$ strictly between $0$ and $h$ such that
+$$f'(c_h) = \frac{f(h) - f(0)}{h - 0} = \frac{f(h) - f(0)}{h}.$$
+
+Now, we need to find the limit of this expression as $h \to 0$.
+As $h \to 0$, the value $c_h$ is   ``squeezed" between $0$ and $h$. By the Squeeze Theorem, we must have $\lim_{h \to 0} c_h = 0$.
+
+We can now take the limit of both sides of our equation from the MVT:
+$$\lim_{h \to 0} \frac{f(h) - f(0)}{h} = \lim_{h \to 0} f'(c_h)$$
+
+Since we know $\lim_{h \to 0} c_h = 0$ and we are given that $\lim_{x \to 0} f'(x) = L$, it follows that
+$$\lim_{h \to 0} f'(c_h) = \lim_{c_h \to 0} f'(c_h) = L$$
+
+Therefore, we have shown
+$$\lim_{h \to 0} \frac{f(h) - f(0)}{h} = L$$
+
+This proves by definition that $f'(0)$ exists and $f'(0) = L$.
+
+\end{proof}
+
+\bigskip
+
+\section*{Problem 9}
+\begin{proof}
+\begin{enumerate}
+    \item[a)] We define $g(x) = f(x)-x$, then we want to show that $\exists! y \in \bbR$ such that $g(y)=0$.
+
+For existence, let $k = L - 1$, then we have $g'(x) < k<0$.
+    
+    By the Mean Value Theorem on the interval $[0, x]$ for any $x > 0$, there exists a $c \in (0, x)$ such that
+    $$ \frac{g(x) - g(0)}{x - 0} = g'(c) $$
+    $$ g(x) = g(0) + g'(c) \cdot x $$
+    Since $g'(c) < k$ and $x > 0$, we have $g'(c) \cdot x < kx$. Therefore:
+    $$ g(x) < g(0) + kx $$
+    As $x \to \infty$, $g(0)$ is a constant and $k$ is a negative constant, so
+    $$ \lim_{x \to \infty} (g(0) + kx) = -\infty $$
+    Thus, $\lim_{x \to \infty} g(x) = -\infty$. Analogously for the other case of $[x,0]$ for any $x<0$, we see that $\lim_{x \to -\infty} g(x) = \infty$. Then, by Intermediate Value Theorem, $\exists y \in \bbR$ such that $g(y)=0$.
+
+For uniqueness, suppose for sake of contradiction that we have $z\neq y$ and $g(z)=g(y)=0$. Without loss of generality suppose $y<z$. We note that $g'(x)=f'(x)-1<L-1<0$ hence $g$ is strictly decreasing, so $y<z$ implies $0=g(y)>g(z)=0$ which is a contradiction.
+
+\item[b)] Consider $f(x)=x+e^{-x}$, then $f'(x)=1-e^{-x} \to_{x\to \infty} 1$.
+
+Setting $f(x)=x$, we see that $x+e^{-x} =x$ hence $e^{-x}=0$ which has no solutions, hence the function $f$ has no fixed points.
+
+\end{enumerate}
+\end{proof}
+
+\bigskip
+
+\section*{Problem 11}
+\begin{proof}
+\begin{enumerate}
+    \item[a)] We know that $f''(x)$ exists, hence $f'(y)$ exists in an open interval around $x$. The limit is in the form $\frac{0}{0}$, so we can apply L'Hôpital's Rule by differentiating the numerator and denominator with respect to $h$.
+
+\begin{align*}
+\lim_{h \to 0} \frac{f(x + h) - 2f(x) + f(x - h)}{h^2}
+&\stackrel{L'H}{=} \lim_{h \to 0} \frac{\frac{d}{dh}[f(x + h) - 2f(x) + f(x - h)]}{\frac{d}{dh}[h^2]} \\
+&= \lim_{h \to 0} \frac{f'(x+h) \cdot 1 - 0 + f'(x-h) \cdot (-1)}{2h} \\
+&= \lim_{h \to 0} \frac{f'(x+h) - f'(x-h)}{2h}
+\end{align*}
+
+Then, we note that
+
+\begin{align*}
+\lim_{h \to 0} \frac{f'(x+h) - f'(x-h)}{2h}
+&= \lim_{h \to 0} \frac{1}{2} \left[ \frac{f'(x+h) - f'(x) + f'(x) - f'(x-h)}{h} \right] \\
+&= \frac{1}{2} \left[ \lim_{h \to 0} \frac{f'(x+h) - f'(x)}{h} + \lim_{h \to 0} \frac{f'(x) - f'(x-h)}{h} \right]
+\end{align*}
+
+We evaluate the two limits separately. For the first limit, $\displaystyle \lim_{h \to 0} \frac{f'(x+h) - f'(x)}{h} = f''(x)$ (by definition of the derivative).
+
+For the second limit, let $k = -h$. As $h \to 0$, $k \to 0$.
+    \begin{align*}
+        \lim_{h \to 0} \frac{f'(x) - f'(x-h)}{h} &= \lim_{k \to 0} \frac{f'(x) - f'(x+k)}{-k}\\ &= \lim_{k \to 0} \frac{-(f'(x+k) - f'(x))}{-k} \\&= \lim_{k \to 0} \frac{f'(x+k) - f'(x)}{k} \\&= f''(x).
+    \end{align*}
+
+Substituting these results back into the equation:
+$$ \frac{1}{2} [f''(x) + f''(x)] = \frac{1}{2} [2f''(x)] = f''(x) $$
+This completes the proof.
+
+\item[b)]Consider the function $f(x) = x|x|$ at the point $x=0$.
+
+$f''(0)$ fails to exist. The function can be written as $f(x) = \begin{cases} x^2 & \text{if } x \ge 0 \\ -x^2 & \text{if } x < 0 \end{cases}$.
+The first derivative is $f'(x) = 2|x|$.
+We check the left-hand and right-hand limits for the derivative of $f'(x)$ at $x=0$:
+\begin{itemize}
+    \item Right-hand limit: $\displaystyle \lim_{h \to 0^+} \frac{f'(0+h) - f'(0)}{h} = \lim_{h \to 0^+} \frac{2h - 0}{h} = 2$
+    \item Left-hand limit: $\displaystyle \lim_{h \to 0^-} \frac{f'(0+h) - f'(0)}{h} = \lim_{h \to 0^-} \frac{-2h - 0}{h} = -2$
+\end{itemize}
+Since the limits $2$ and $-2$ are not equal, $f''(0)$ does not exist.
+
+The symmetric limit exists.
+We compute the limit from part (a) at $x=0$:
+\begin{align*}
+\lim_{h \to 0} \frac{f(0 + h) - 2f(0) + f(0 - h)}{h^2}
+&= \lim_{h \to 0} \frac{f(h) - 0 + f(-h)}{h^2} \\
+&= \lim_{h \to 0} \frac{h|h| + (-h)|-h|}{h^2} \\
+&= \lim_{h \to 0} \frac{h|h| - h|h|}{h^2} \quad (\text{since } |-h| = |h|) \\
+&= \lim_{h \to 0} \frac{0}{h^2} = \lim_{h \to 0} 0 = 0.
+\end{align*}
+Thus, the limit exists and is $0$, even though $f''(0)$ does not exist.
+    
+    \end{enumerate}
+
+
+\end{proof}
+
+\end{document}
