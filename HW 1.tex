@@ -1,0 +1,344 @@
+\documentclass[11pt]{article}
+
+%----------Packages----------
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage[mathcal]{eucal}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{verbatim}
+\usepackage{fullpage}
+\usepackage{multicol}
+
+%----------Commands----------
+\clubpenalty=9999
+\widowpenalty=9999
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\O}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\arr}{\longrightarrow}
+
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\bridge}{bridge}
+
+%---------- Proof QED change ----------
+\renewcommand{\qedsymbol}{QED}
+
+%----------Theorems----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\numberwithin{equation}{subsection}
+
+%----------Document----------
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries MATH 20700 Honors Analysis I}\\[6pt]
+    {\Large Homework 1}\\[6pt]
+    {\Large\itshape Malhar Manek}
+\end{center}
+
+\bigskip
+
+%----------- Cleaner Problem Macro -----------
+\newcommand{\problem}[2]{
+    \begin{theorem*}{Problem #1}
+    \begin{proof}
+    #2
+    \end{proof}
+    \end{theorem*}
+    \bigskip
+}
+
+%----------- Problems -----------
+\problem{9}{
+\begin{enumerate}
+    \item[a)] First we want to show that $A + A' \cap B + B' = \emptyset$. 
+    
+    Suppose for sake of contradiction that $y \in A + A' \cap B + B'$. Then, $\exists a \in A, a' \in A'$ such that \ $a + a' = y$ and $\exists b \in B, b' \in B'$ such that \ $b + b' = y$. 
+    
+    However, by definition of cuts, $a < b$ and $a' < b'$ implies that $y = a + a' < b + b' = y$, contradicting the trichotomy of the ordering.
+
+    Second we want to show that  it may happen in degenerate cases that $\bbQ$ is not the union of $A + A'$ and $B + B'$. Consider $A=\{r\in \bbQ \mid r\leq 0 \text{ or } r^2<2\}$ and $B = \bbQ \setminus A$. Further, consider $A' = \{r\in \bbQ \mid r<0 \text{ and } r^2>2\}$ and $B'=\bbQ \setminus A'$.
+
+    Then, we claim that $0 \notin (A+A') \cup (B+B')$. 
+
+    First let us see that $0 \notin A +A'$. Suppose for sake of contradiction that there exist $a\in A, a'\in A'$ with $a+a'=0$. We know that $a'<0$, hence it must be that $a>0$. Then $-a<0$ and $a'<0$. But since $a'^2>2$ and $a^2<2$, we have that $a'<-a$, hence $a'+a<0$. (Alternatively, $a'=-a$ so $2<a'^2=a^2<2$).
+
+    Second let us see that $0 \notin B +B'$. Suppose for sake of contradiction that there exist $b\in B, b'\in B'$ with $b+b'=0$. We have that $b'=-b$ so $2\leq b^2=b'^2\leq 2$ and the only way that inequality can be satisfied is if $b^2=2$ but it is trivial to see that this cannot be true for any $b\in \bbQ$.
+
+    This completes the proof.
+
+    \item[b)] If we defined $x+x'$ as $(A+A')\mid (B +B')$ then part a) provides a counterexample (degenerate case) where it would violate the requirement of Dedekind cuts that $\bbQ = (A+A')\cup (B +B')$.
+
+    \item[c)] Consider $x=1,x'=-1$ with the same convention $x=A\mid B, x'=A'\mid B'$. We have that $0\in A, -2\in A'$, hence $0\in A \cdot A'$, but $-1\cdot 1 = -1<0$. This provides a counterexample for why we do not define $x\cdot x'$ as $A\cdot A'\mid \text{rest of }\bbQ$. 
+
+    
+\end{enumerate}
+
+}
+
+\problem{11}{
+\begin{enumerate}
+    \item[a)] $C=\{r\in \bbQ \mid r\leq 0\} \cup \{r\in \bbQ \mid r>0, \frac{1}{r}\notin A \text{ and } \frac{1}{r} \text{ is not the least element of } B\}$.
+
+And $D=\bbQ \setminus C$. 
+
+To prove that $x \cdot y = 1^*$, we denote the product cut as $P|Q$ and show that $P$ is equal to $L_1 = \{q \in \mathbb{Q} \mid q < 1\}$. Since both $x$ and $y$ are positive cuts, by definition $P = \{r \in \mathbb{Q} \mid r \le 0\} \cup \{ac \mid a \in A, c \in C, a>0, c>0\}$.
+
+First, we show $P \subseteq L_1$. Any non-positive element of $P$ is in $L_1$. For any positive element $p = ac \in P$, we have $a \in A$ and $c \in C$. By the definition of $C$, $c>0$ implies that $1/c \notin A$, which means $1/c \in B$. By the definition of a cut, any element of $A$ is less than any element of $B$, so $a < 1/c$. Since $a$ and $c$ are positive, this gives $ac < 1$, so $p \in L_1$. Thus $P \subseteq L_1$.
+
+Next, we show $L_1 \subseteq P$. Let $q \in L_1$. We may assume $q > 0$. It suffices to show that there exists an element in $P$ that is greater than $q$. Choose a rational number $r$ such that $q < r < 1$. Since $rx < x$, there exists an element $a \in A$ such that $a > rx$. As $r>0$, we can write $a/r > x$, which implies $a/r \in B$. Let $k = a/r$. We can choose a rational $b \in B$ such that $b < k$ and $b$ is not the least element of $B$. (If $B$ has no least element, any $b$ in the interval defined by $x$ and $k$ works. If $B$ has a least element $b_{\min}$, then $k > b_{\min}$, so we can choose $b = (k+b_{\min})/2$.) Let $c = 1/b$. By our choice of $b$, $c$ is a positive element of $C$. From $b<k$, we have $c = 1/b > 1/k = r/a$. Thus, $ac > r$. Since $r > q$, we have found an element $ac \in P$ greater than $q$. This implies $L_1 \subseteq P$.
+
+Since $P \subseteq L_1$ and $L_1 \subseteq P$, we have $P = L_1$, and therefore $x \cdot y = 1^*$.
+
+\item[b)] $C= \{r\in \bbQ \mid r<0 \text{ and } \frac{1}{r}\notin A\}$.
+
+And $D=\bbQ \setminus C$.
+
+For $x < 0^*$, the multiplicative inverse $y$ must also be negative. The product of two negative cuts is defined as $x \cdot y = (-x) \cdot (-y)$. Let $x' = -x$ and $y' = -y$. Both $x'$ and $y'$ are positive cuts, and our goal is to show that the construction of $y$ leads to $x'y'=1^*$.
+
+From part a), we know the positive cut $x'=-x$ has a unique positive inverse, which we can call $(x')^{-1}$. If we define our cut $y$ to be $y = -( (x')^{-1} )$, then $y$ is a negative cut and the product is:
+$$x \cdot y = x \cdot \left(-\left( (-x)^{-1} \right)\right)$$
+By the definition of multiplication with negative cuts, this becomes:
+$$(-x) \cdot \left(- \left(-\left( (-x)^{-1} \right)\right)\right) = (-x) \cdot \left((-x)^{-1}\right) = x' \cdot (x')^{-1} = 1^*$$
+The construction for $C=\{r\in \bbQ \mid r<0 \text{ and } \frac{1}{r}\notin A\}$ and $D = \mathbb{Q}\setminus C$ can be shown to be precisely the cut that corresponds to $y = -((-x)^{-1})$. Therefore, the construction is correct and $x \cdot y = 1^*$.
+
+\item[c)] Suppose for sake of contradiction that $y,y'$ are non-zero cuts with $y\neq y'$ and $x\cdot y=x\cdot y'=1^*$. We have $y=C\mid D, y'=C'\mid D'$.
+
+Without loss of generality let $y<y'$, then we have that $C \subsetneq C'$. Thus, $\exists c'\in C'$ such that $c' \notin C$.
+
+Then, since $c'\in C'$, we have $\frac{1}{c'}\notin A$. But since $c'\notin C$, we have $\frac{1}{c'}\in A$. 
+
+This contradiction completes the proof.
+
+\end{enumerate}
+
+}
+
+\problem{13}{
+\begin{enumerate}
+\item [a)] $\forall s \in S, s\leq b$ by definition of upper bound. Since $b$ is the least upper bound, we have that $b-\epsilon$ is not an upper bound. Hence $\exists s\in S$ such that $b-\epsilon\leq s\leq b$.
+
+\item[b)] No. Consider the singleton set $S$ whose only element is $s$. Then, $s$ is the least upper bound of $S$ so no element of $S$ can be found that is strictly smaller than $s$.
+
+\item[c)] We want to show that $x$ is an upper bound for $A$. Since $x\notin A$ it follows that $x\in B$ hence $x$ is an upper bound for $A$ since $\forall a,b$, we have $a<b$.
+
+We want to show that any other upper bound must be $\geq x$. Suppose for sake of contradiction there is an upper bound $u<x$. Then $u\in A$ implies $u$ is not an upper bound since $A$ has no largest element.
+
+
+\end{enumerate}  
+}
+
+\problem{14}{
+$x\cdot x$ is given by the cut $E\mid F$, where $E = \{r \in \bbQ : r \leq 0 \text{ or } \exists a,a' \in A \text{ such that } a,a' > 0 \text{ and } r = aa'\}$ and $F=\bbQ \setminus E$.
+
+Let $A=\{r \in \bbQ : r \leq 0 \text{ or } r^2<2 \}$. By Exercise 13, $x= \sup A$. 
+
+We want to show that $2=\sup E$. (By Exercise 13, $x\cdot x= \sup E$.)
+
+First let us show that 2 is an upper bound for $E$. Let $e\in E$, then $e=aa'$ for some $a,a'\in A$. Thus, $e^2=a^2a'^2<4$ hence $e<2$. 
+
+Second let us show that 2 is the least upper bound for $E$. Suppose there is an upper bound $u<2$. Then we can write $u=2-\epsilon$ for some $\epsilon>0$. 
+
+By continuity of $x^2$, $\exists \delta>0$ such that if $|y-x|<\delta$ then $|y^2-x^2|<\epsilon$. 
+
+Pick $y=x-\frac{\delta}{2}$, then $y\in A$ since $y^2<2$. Then, $|y^2-2|<\epsilon$ so $y^2>2-\epsilon$ with $y\in A$. This contradicts the assumption that $u$ is an upper bound for $E$. 
+
+}
+
+\problem{16}{
+Let $y=\sup \{s\in \bbR \mid s^n\leq x\}$.
+
+Suppose for sake of contradiction that $y^n<x$. Then let $\epsilon=x-y^n$. 
+
+Exercise 15 says that $\forall \epsilon>0, \exists \delta>0$ such that if $|y-s|<\delta$ then $|y^n-s^n|<\epsilon$. 
+
+Thus, $|y^n-s^n|<x-y^n$. Let $s=y+\frac{\delta}{2}$ (hence note that $s>y$), then $|y^n-s^n|=s^n-y^n<x-y^n$. 
+
+Hence $s^n<x$ and $s>y$. This contradicts the assumption that $y$ is an upper bound for $\{s\in \bbR \mid s^n\leq x\}$.
+
+The other case is analogous - suppose for sake of contradiction that $y^n>x$. Then let $\epsilon=y^n-x$. 
+
+This shows the existence of $y$ such that $y^n=x$.
+
+For uniqueness, suppose for sake of contradiction that $y_1 \neq y_2$ with $y_1^n=x=y_2^n$. Without loss of generality assume $y_1>y_2$ then $x=y_1^n>y_2^n=x$. This contradiction implies $y$ is unique.
+}
+
+\problem{18}{
+\begin{enumerate}
+\item[a)] We have that $x_k=\text{floor} \left[ 10^k (x-(N+ \displaystyle \sum_{i=1}^{k-1} \frac{x_i}{10^i})) \right]$
+
+Let $y_k = 10^k (x-(N+ \displaystyle \sum_{i=1}^{k-1} \frac{x_i}{10^i}))$ then $x_k= \text{floor} (y_k)$.
+
+Then,
+\begin{align*} y_{k+1} &= 10^{k+1} \left(x-\left(N+ \sum_{i=1}^{k} \frac{x_i}{10^i}\right)\right) \\ &= 10^{k+1} \left(x-\left(N+ \sum_{i=1}^{k-1} \frac{x_i}{10^i} + \frac{x_k}{10^k}\right)\right) \\ &= 10^{k+1} \left(x-\left(N+ \sum_{i=1}^{k-1} \frac{x_i}{10^i}\right) - \frac{x_k}{10^k}\right) \\ &= 10^{k+1} \left(x-\left(N+ \sum_{i=1}^{k-1} \frac{x_i}{10^i}\right)\right) - 10^{k+1} \frac{x_k}{10^k} \\ &= 10 \left[ 10^k \left(x-\left(N+ \sum_{i=1}^{k-1} \frac{x_i}{10^i}\right)\right) \right] - 10x_k \\ &= 10y_k - 10x_k \\ &= 10(y_k-x_k). \end{align*}
+
+Thus $y_{k+1}=10(y_k-x_k)$. Hence $x_{k+1}= \text{floor}(10(y_k-x_k))$.
+
+Since $x_k=\text{floor}(y_k)$, we have that $0\leq y_k-x_k < 1$. Hence, $0\leq 10(y_k-x_k) < 10$. 
+
+Hence $0\leq \text{floor}(10(y_k-x_k))<10$ hence $0\leq \text{floor}(10(y_k-x_k))\leq 9$ hence $0\leq x_{k+1}\leq 9$. 
+
+For $k=1$, we want to show that $0\leq x_1\leq 9$. We have that $N = \text{floor}(x)$ hence $N\leq x< N+1$. Hence $0\leq x-N < 1$. 
+
+Hence $0\leq 10(x-N)<10$. Since $x_1=\text{floor}(10(x-N))$, we have $0\leq x_1 <10$ thus $0\leq x_1\leq 9$. 
+
+\item[b)] Suppose for sake of contradiction that $\exists k$ such that $\forall l\geq k, x_l=9$.
+
+We have $x_k=\text{floor} \left[ 10^k (x-(N+ \displaystyle \sum_{i=1}^{k-1} \frac{x_i}{10^i})) \right]$ so let us define, as before, $y_k = 10^k (x-(N+ \displaystyle \sum_{i=1}^{k-1} \frac{x_i}{10^i}))$. Then, $x_k = \text{floor}(y_k)$.
+
+Let $l=k+j$ with $j \in \bbN \cup \{0\}$, then $y_l = 10^{k+j} \left(x-(N+\displaystyle \sum_{i=1}^{k-1} \frac{x_i}{10^i} + 9 \displaystyle \sum_{i=k}^{k+j-1} \frac{1}{10^i})\right)$.
+
+Distributing the power of $10^{k+j}$, we see that
+\[
+y_l = 10^{k+j} \left(x-(N+\sum_{i=1}^{k-1} \frac{x_i}{10^i})\right)-9 \sum_{i=1}^j 10^i.
+\]
+
+Thus, $y_l=y_{k+j} = 10^j y_k - 9\displaystyle \sum_{i=1}^j 10^i=10^j y_k-10(10^j-1)$.
+
+We have that $\forall j \in \bbN \cup \{0\}, 9\leq y_{k+j}<10$, since $\forall j \in \bbN \cup \{0\}, x_{k+j}=9$, and $x_{k+j} = \text{floor}(y_{k+j})$. Thus, we see that
+
+\begin{align*}
+9 &\leq 10^j y_k - 10(10^j - 1) < 10 \\
+9 &\leq 10(10^{j-1} y_k - 10^j + 1) < 10 \\
+\frac{9}{10} &\leq 10^{j-1} y_k - 10^j + 1 < 1 \\
+-\frac{1}{10} &\leq 10^{j-1} y_k - 10^j < 0 \\
+-\frac{1}{10} &\leq 10^{j-1} (y_k - 10) < 0 \\
+-\frac{1}{10^j} &\leq y_k - 10 < 0 \\
+10 - \frac{1}{10^j} &\leq y_k < 10.
+\end{align*}
+
+This is a contradiction, since the chain of inequalities is supposed to hold for all $j \in \bbN \cup \{0\}$. So for a given $y_k$, it is possible to find $j$ large enough such that the chain of inequalities fails (i.e. it violates trichotomy).
+
+This completes the proof.
+
+\item[c)] Clearly $N$ is a lower bound and $N+1$ is an upper bound for the set $J=\{N, N+\frac{x_1}{10}, N+\frac{x_1}{10}+\frac{x_2}{100},\dots\}$, hence it is bounded.
+
+Let us show that $N.x_1x_2\dots $ is the least upper bound. Clearly, it is an upper bound because for any $n \in J$, we can write $n=N+\displaystyle \sum_{i=1}^k \frac{x_i}{10^i} < N + \displaystyle \sum_{i=1}^\infty \frac{x_i}{10^i} = N.x_1x_2\dots$.
+
+Any smaller upper bound must be of the form $N.y_1y_2\dots$ with $y_j<x_j$ for some $j$. Then, by construction, there exists $n_j=N+\displaystyle \sum_{i=1}^j \frac{x_i}{10^i} \in J$ such that $n_j>N.y_1y_2\dots$ contradicting the assumption that it is an upper bound.
+
+This completes the proof.
+
+\item[d)] Let the general base be $b$. Then copying what we have done previously and replacing $10$ with $b$ and 9 with $b-1$ everywhere completes the exercise. 
+
+\end{enumerate}
+}
+
+\problem{19}{
+Let $M \subset \bbR$ be a set of real numbers. Then, $\inf(M)$ is the greatest lower bound of $M$ such that $\forall m\in M, m\geq \inf(M)$ and $\forall L \in \bbR \text{ such that $L$ is a lower bound for $M$, } L\leq \inf(M)$. 
+
+Then the theorem is that every non-empty subset of $\bbR$ that is bounded below has a greatest lower bound.
+
+Let $S$ be a non-empty subset of $\bbR$ that is bounded above. Then, construct a new set $M=\{m\in \bbR : -m \in S\}$. We want to show that $\inf M = - \sup S$. 
+
+First let us show that $-\sup S$ is a lower bound for $M$. Since $\sup S$ is an upper bound for $S$, we have that $\forall s\in S, s\leq \sup S$. Thus, flipping signs of the inequality, we see that $\forall s\in S, -s\geq -\sup S$. By construction of $M$ this is the same as saying $\forall m\in M, m\geq -\sup S$. 
+
+Second let us show that $-\sup S$ is the greatest lower bound for $M$. Suppose for sake of contradiction that there is a greater lower bound and call it $K$. Then, $\forall m\in M, m\geq K\geq -\sup S$. Hence, Then, $\forall s\in S, -s\geq K\geq -\sup S$. Then, $\forall s\in S, s\leq -K\leq \sup S$, which is a contradiction since $-K$ is a smaller upper bound than $\sup S$. 
+
+This completes the proof.
+
+}
+
+\problem{20}{
+Suppose $(a_n)$ converges to $b$ and also converges to $b'$. Let $\epsilon>0$ be arbitrary, then it suffices to show that $|b-b'|<\epsilon$. 
+
+We know that $\exists M_1$ such that $\forall m\geq M_1, |a_m-b|<\frac{\epsilon}{2}$. 
+
+Similarly $\exists M_2$ such that $\forall m\geq M_2, |a_m-b'|<\frac{\epsilon}{2}$.
+
+Take $M=\max(M_1,M_2)$, then $\forall m \geq M$,
+\[
+|b-b'|=|b-a_m+a_m-b'|\leq |b-a_m|+|a_m-b'|<\frac{\epsilon}{2}+\frac{\epsilon}{2} =\epsilon.
+\]
+
+This completes the proof.
+}
+
+\problem{26}{
+\begin{enumerate}
+    \item[a)]
+
+We note that $\pi R^2\leq b(R) \leq \pi (R+\sqrt{2})^2$. The lower bound is easy to see because the area of the circle is $\pi R^2$ and we are considering unit squares that each have area 1. The upper bound comes from seeing that any squares that are partially contained in the circle of radius $R$ must be fully contained in the circle of radius $R+\sqrt{2}$.
+
+Further, we note that $\pi R^2-\pi (R-\sqrt{2})^2 \leq s(R) \leq \pi (R+\sqrt{2})^2-\pi R^2$. This is because the number of squares that intersect the surface of the circle can be thought of as the difference in the number of squares that intersect the circle with radius $R+\sqrt{2}$ and the circle with radius $R$, and similarly (for the lower bound) the difference in the number of squares that intersect the circle with radius $R$ and the circle with radius $R-\sqrt{2}$.
+
+Equipped with these two inequalities, we can try to use squeeze theorem to find the limits. We see that \[
+\frac{\pi R^2-\pi (R-\sqrt{2})^2}{\pi (R+\sqrt{2})^2} \leq \frac{s(R)}{b(R)} \leq \frac{\pi (R+\sqrt{2})^2-\pi R^2}{\pi R^2}.
+\]
+
+Simplifying, we get \[
+\frac{\pi (2 \sqrt{2} R-2)}{\pi(R^2+2\sqrt{2}R+2)} \leq \frac{s(R)}{b(R)} \leq \frac{\pi(2\sqrt{2}R+2)}{\pi R^2}.
+\]
+
+By squeeze theorem, we see that $\displaystyle \lim_{R \to \infty} \frac{s(R)}{b(R)} = 0$.
+
+For the other limit, we see that $s(R)=8\lceil R \rceil -4$. (This is because of a simple combinatorics argument - the number of squares intersected across a diagonal path can be lined up in a vertical column and a horizontal row with double counting of the bottom square, hence the $-1$). Then,
+
+\[
+\frac{64R^2-64R+16}{\pi(R^2+2\sqrt{2}R+2)} \leq \frac{s(R)^2}{b(R)} \leq \frac{64R^2-64R+16}{\pi R^2}.
+\]
+
+By squeeze theorem, we see that $\displaystyle \lim_{R \to \infty} \frac{s(R)^2}{b(R)} = \frac{64}{\pi}$.
+
+\item[b)] $b(R)$ scales as $O(R^m)$, borrowing the big-O notation, while $s(R)$ scales as $O(R^{m-1})$ so the exponent $k=\frac{m}{m-1}$ makes the limit interesting.
+
+\item[c)] We note that $c(R)=b(R)-s(R)$ and with $m=3$, we extend the original expressions from part a) for 3 dimensions (volume instead of area) so have that 
+
+\[
+\frac{4}{3}\pi R^3 \leq b(R) \leq \frac{4}{3}\pi(R+\sqrt2)^3,
+\]
+
+and
+\[
+\frac{4}{3}\pi R^3-\frac{4}{3}\pi(R-\sqrt2)^3 \leq s(R) \leq \frac{4}{3}\pi(R+\sqrt2)^3-\frac{4}{3}\pi(R-\sqrt2)^3.
+\]
+    
+Remember that $c(R) = b(R)-s(R)$ because the number of unit cubes fully contained in the ball of radius $R$ is the difference between the number of unit cubes intersecting the ball of radius $R$ and the number of unit cubes intersecting its surface. Then we get
+
+\[\frac{4}{3}\pi R^3 - \frac{4}{3}\pi(R+\sqrt2)^3+\frac{4}{3}\pi(R-\sqrt2)^3 \leq c(R) \leq \frac{4}{3}\pi(R+\sqrt2)^3 - \frac{4}{3}\pi R^3+\frac{4}{3}\pi(R-\sqrt2)^3.\]
+
+Thus, 
+\[
+\frac{R^3 -(R+\sqrt2)^3+(R-\sqrt2)^3}{(R+\sqrt2)^3} \leq \frac{c(R)}{b(R)} \leq \frac{(R+\sqrt2)^3 - R^3+(R-\sqrt2)^3}{R^3}.
+\]
+
+Simplifying, we see that \[
+\frac{R^3 - 6\sqrt{2}R^2 - 4\sqrt{2}}{R^3 + 3\sqrt{2}R^2 + 6R + 2\sqrt{2}} \leq \frac{c(R)}{b(R)} \leq 1 + \frac{12}{R^2},
+\]
+
+hence $\displaystyle \lim_{R\to \infty} \frac{c(R)}{b(R)}=1$.
+
+\item[d)] When we shift the ball to an arbitrary center, none of the limits change. This is because even though the exact number of squares intersected will change (if the center is no longer at an integer lattice point), the difference in number of squares intersected between the  arbitrary center case and the original case does not scale faster than $R^{m-1}$. Hence, all of the limits are unchanged.
+
+\end{enumerate}
+
+}
+
+\end{document}
